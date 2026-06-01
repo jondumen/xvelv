@@ -51,7 +51,6 @@
     integrity="sha512-uzqSpS2U7Z3tnY+seBGy5QNl2OltQwaeEErbDOI5s7t3sVA+VIQe0Sko4ZcS1I2Tugbb8Um9/VlJNDqoILgQ3w=="
     nonce="">
   <link href="./js/f6f5a5b7ef3f649e.js" rel="preload" as="script" crossorigin="anonymous"
-    integrity="sha512-PF7jVofvl66I8bswLQFJzmYGabPoiZU0/sP5ekAd0PV7jgqC1oGFjvA5rCOMnVXI6YGsR8tj3BTezViIMnubgg=="
     nonce="">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:title" content="XV Jaqueline y XVI Javier">
@@ -2354,9 +2353,22 @@
   <script crossorigin="anonymous" src="./js/c22abba2331adf4c.es-MX.js"
     integrity="sha512-uzqSpS2U7Z3tnY+seBGy5QNl2OltQwaeEErbDOI5s7t3sVA+VIQe0Sko4ZcS1I2Tugbb8Um9/VlJNDqoILgQ3w=="
     nonce=""></script>
-  <script crossorigin="anonymous" src="./js/f6f5a5b7ef3f649e.js" defer=""
-    integrity="sha512-PF7jVofvl66I8bswLQFJzmYGabPoiZU0/sP5ekAd0PV7jgqC1oGFjvA5rCOMnVXI6YGsR8tj3BTezViIMnubgg=="
-    nonce=""></script>
+  
+  <script>
+  // Parche por si busca una configuración global
+  window.CONFIG = window.CONFIG || {};
+  window.CONFIG.B = "dummy_string"; 
+
+  // Parche común para Next.js por si falta el objeto de datos
+  if (!window.__NEXT_DATA__) {
+     window.__NEXT_DATA__ = { props: {}, page: "/", query: {}, buildId: "1" };
+  }
+</script>
+<script src="./js/f6f5a5b7ef3f649e.js"></script>
+
+
+  <!--<script crossorigin="anonymous" src="./js/f6f5a5b7ef3f649e.js" defer=""
+    nonce=""></script>-->
   <div class="Q_Mxww">
     <div class="AdBbhQ"></div>
   </div>

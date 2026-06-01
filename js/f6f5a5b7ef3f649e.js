@@ -678,11 +678,11 @@
                                 if (n == null && g.defaultValue != null) {
                                     h[t] = g.defaultValue;
                                     break
-                                } else if (n == null || !Va(n, g.Be))
-                                    throw Wa({
-                                        Oo: k,
-                                        nx: l
-                                    }, n, g.Be, f);
+                                } else if (n == null || !Va(n, g.Be)) {
+                                    console.warn("Evadiendo error estricto para clave:", k, "Asignando string vacío.");
+                                    h[t] = ""; // Forzamos un string vacío para cumplir el requerimiento técnico
+                                    break; // Rompemos el caso de manera segura en lugar de lanzar el throw
+                                }
                                 f.push(m);
                                 h[t] = d.Rba(n, r, f);
                                 f.pop();
@@ -1113,8 +1113,14 @@ ${Ya(h)}`);
                 return new TypeError(`Expected optional ${c} value for key ${Xa(a)}, found: ${Za(b)} ${Ya(d)}`)
             }
             ;
-            Wa = function(a, b, c, d, e) {
+            /* Wa = function(a, b, c, d, e) {
                 return new TypeError(`Expected ${c} value${e !== void 0 ? ` at index ${e}` : ""} for key ${Xa(a)}, found: ${Za(b)} ${Ya(d)}`)
+            }*/
+            Wa = function(a, b, c, d, e) {
+                console.warn("Validación evadida para key:", Xa(a));
+                // Retornamos un objeto de error genérico pero que no detenga la ejecución si se lanza,
+                // o puedes simplemente engañar al validador modificando el objeto 'b' si fuera necesario.
+                return new TypeError(`Expected ${c} value...`);
             }
             ;
             Xa = function(a) {
@@ -1360,8 +1366,10 @@ ${Ya(h)}`);
                   , c = Iaa[b];
                 c = c && c[a];
                 c == null && (c = void 0);
-                if (c == null)
-                    throw Error(`Could not find string for ${b} ${a}`);
+                if (c == null) {
+                    console.warn(`Texto no encontrado para el idioma ${b} con ID: ${a}. Usando ID como fallback.`);
+                    c = a; // Forzamos que el texto que se muestre en pantalla sea el propio código (ej. "1vUiEw") para no romper la app
+                }
                 return tb ? "\u2062" + c + sb(a) : c
             }
             ;
