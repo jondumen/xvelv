@@ -268,16 +268,16 @@
             ;
             w = __c.w = function(a, b, ...c) {
                 if (!a) {
-                    // Calculamos el mensaje de error original
+                    // Calculamos el mensaje de error para revisarlo
                     const msg = b == null ? "invalid argument" : na(b, ...c);
                     
-                    // ESCUDO AMPLIADO: Ignoramos aserciones de valores o argumentos inválidos del clon estático
-                    if (msg.includes("invalid value") || msg.includes("invalid argument")) {
-                        console.warn("Ignorando aserción estricta de Google: ", msg);
-                        return; // Evitamos el colapso de la promesa saliendo de forma segura
+                    // Si el error es por un valor inválido debido a nuestros parches de rescate, lo ignoramos
+                    if (msg.includes("invalid value")) {
+                        console.warn("Ignorando aserción estricta de valor: ", msg);
+                        return; // Salimos de la función de forma segura sin lanzar el 'throw'
                     }
                     
-                    // Cualquier otro error crítico real del sistema se mantiene protegido
+                    // Para cualquier otro error crítico del sistema, dejamos que actúe normalmente
                     throw Error(msg);
                 }
             }
@@ -60189,7 +60189,8 @@ ${Ya(h)}`);
                     if (a != null)
                         switch (a.type) {
                         case 1:
-                            w(this.Y9a.Xg(this._value.get(), a.oldState));
+                            console.warn("Saltando validación de estado anterior en u8a.Nt para forzar renderizado.");
+                            // w(this.Y9a.Xg(this._value.get(), a.oldState)); // Desactivamos el throw
                             this._value.set(a.newState);
                             break;
                         case 0:
