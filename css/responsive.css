@@ -1,0 +1,27 @@
+/* Escudo Responsivo de Emergencia */
+@media (max-width: 768px) {
+    /* 1. Obliga a todo elemento ancho a no desbordar la pantalla del celular */
+    div, section, article, table, form, iframe, img, canvas {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 2. Convierte anchos fijos grandes en porcentajes fluidos */
+    *[style*="width"] {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* 3. Evita el scroll horizontal molesto en dispositivos móviles */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 4. Si hay elementos en columnas que se aplastan, los obligamos a ponerse uno abajo del otro */
+    .flex, [style*="display: flex"], [style*="display:flex"] {
+        flex-direction: column !important;
+    }
+}
