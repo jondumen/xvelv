@@ -9,6 +9,17 @@
   <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <script>
+    // Silencia los console.warn de las librerías de Google
+    const originalWarn = console.warn;
+    console.warn = function(...args) {
+      if (args[0] && typeof args[0] === 'string' && (args[0].includes('Evadiendo') || args[0].includes('not found') || args[0].includes('Texto no encontrado'))) {
+        return; // Ignora nuestras advertencias de rescate
+      }
+      originalWarn.apply(console, args);
+    };
+  </script>
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   

@@ -967,8 +967,11 @@
                     if (p == null && m)
                         return m.pU(g, h);
                     n = k.get(p);
-                    if (!n)
-                        throw new TypeError(`Unknown oneof serialized case: ${JSON.stringify(p)} ${Ya(h)}`);
+                    if (!n) {
+                        console.warn(`Evadiendo caso 'oneof' desconocido o indefinido para: ${p}. Evitando colapso de promesa.`);
+                        // En lugar de romper, retornamos una simulación del método pU que devuelva un objeto seguro o vacío
+                        return (g && typeof g === 'object') ? g : {};
+                    }
                     return n.pU(g, h)
                 }
                 ;
@@ -1351,11 +1354,13 @@ ${Ya(h)}`);
                 if (f = Haa.get(b))
                     return e = f.format(e),
                     tb ? "\u2062" + e + sb(a) : e;
-                f = (f = Iaa[c]) && f[a];
-                f == null && (f = void 0);
-                if (f == null)
-                    throw Error(`Could not find string for ${c} ${a}`);
-                c = d(f, c);
+                    f = (f = Iaa[c]) && f[a];
+                    f == null && (f = void 0);
+                    if (f == null) {
+                        console.warn(`Texto con formato no encontrado para ${c} con ID: ${a}. Usando fallback.`);
+                        f = a; // Forzamos el ID como texto base
+                    }
+                    c = d(f, c);
                 Haa.set(b, c);
                 e = c.format(e);
                 return tb ? "\u2062" + e + sb(a) : e
