@@ -1,17 +1,9 @@
-# Imagen base de Node.js
-FROM node:20-alpine
+FROM nginx:alpine
 
-# Directorio de trabajo dentro del contenedor
-WORKDIR /app
+# El truco: --chown=nginx:nginx le da los permisos correctos a Nginx automáticamente
+COPY --chown=nginx:nginx . /usr/share/nginx/html
 
-# Instala http-server globalmente
-RUN npm install -g http-server
+# Copia la configuración del filtro de integridad
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copia los archivos del proyecto al contenedor
-COPY . .
-
-# Expone el puerto 8080 (puedes cambiarlo si quieres)
 EXPOSE 8080
-
-# Comando para iniciar el servidor
-CMD ["http-server", "-p", "8080", "-c-1"]
