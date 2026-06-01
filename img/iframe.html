@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reproductor</title>
+    <style>
+        body {
+            margin: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .player {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 15px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .player p {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        audio {
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="player">
+        <p>🎵 Música de fondo</p>
+        <audio controls>
+            <source src="2osy.mp3" type="audio/mpeg">
+            Tu navegador no soporta audio HTML5.
+        </audio>
+    </div>
+
+</body>
+</html>
