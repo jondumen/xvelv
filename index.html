@@ -6,7 +6,31 @@
   <base href=".">
   <title>XV Jaqueline y XVI Javier</title>
   <meta name="app-name" content="export_website">
-  <meta name="viewport" content="width=1200, height=2340, initial-scale=0.4, user-scalable=yes">
+  <!-- 1. Viewport estándar de respaldo -->
+  <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+  <!-- 2. Script para forzar el Modo Escritorio Nativo en Celulares -->
+  <script>
+    (function() {
+      // Detectamos si el usuario está entrando desde un celular o tablet
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        // Obtenemos la etiqueta viewport que pusimos arriba
+        const viewport = document.getElementById('viewport-meta');
+        
+        if (viewport) {
+          // Forzamos un ancho fijo de pantalla de laptop (1280px)
+          // Esto activa el motor de renderizado de escritorio nativo del celular
+          viewport.setAttribute('content', 'width=1280, initial-scale=0.3, minimum-scale=0.2, maximum-scale=3.0, user-scalable=yes');
+          
+          // Parche opcional: Forzamos al HTML y al Body a estirarse para rellenar la pantalla
+          document.documentElement.style.height = '100%';
+          document.body.style.height = '100%';
+        }
+      }
+    })();
+  </script>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
